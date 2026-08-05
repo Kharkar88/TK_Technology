@@ -1,0 +1,145 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-warning">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h3>Trainer Management</h3>
+
+            <a href="/instructors/add/" class="btn btn-light">
+
+                + Add Trainer
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="GET" class="mb-3">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Search Trainer..."
+                        value="{{ search|default_if_none:'' }}">
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-warning">
+
+                        Search
+
+                    </button>
+
+                    <a
+                        href="{% url 'trainer_management' %}"
+                        class="btn btn-secondary">
+
+                        Reset
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Subject</th>
+                    <th>Experience</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for trainer in trainers %}
+
+                <tr>
+
+                    <td>{{ trainer.id }}</td>
+
+                    <td>{{ trainer.name }}</td>
+
+                    <td>{{ trainer.email }}</td>
+
+                    <td>{{ trainer.phone }}</td>
+
+                    <td>{{ trainer.subject }}</td>
+
+                    <td>{{ trainer.experience }} Years</td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'edit_trainer' trainer.id %}"
+                            class="btn btn-primary btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a
+                            href="{% url 'delete_trainer' trainer.id %}"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('Delete this trainer?')">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="7" class="text-center">
+
+                        No Trainers Found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

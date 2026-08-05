@@ -1,0 +1,128 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-danger text-white">
+
+        <h3>Contact Management</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="GET" class="mb-3">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Search Contact..."
+                        value="{{ search|default_if_none:'' }}">
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger">
+
+                        Search
+
+                    </button>
+
+                    <a
+                        href="{% url 'contact_management' %}"
+                        class="btn btn-secondary">
+
+                        Reset
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Subject</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for contact in contacts %}
+
+                <tr>
+
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.subject }}</td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'contact_detail' contact.id %}"
+                            class="btn btn-primary btn-sm">
+
+                            View
+
+                        </a>
+
+                        <a
+                            href="{% url 'delete_contact' contact.id %}"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('Delete this contact?')">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="6" class="text-center">
+
+                        No Contact Messages.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<h2 class="text-center fw-bold mb-5">
+
+🏆 My Certificates
+
+</h2>
+
+{% if student %}
+
+<div class="row mb-4">
+
+<div class="col-lg-4">
+
+<div class="card border-0 shadow-lg rounded-4">
+
+<div class="card-body text-center">
+
+{% if student.profile_image %}
+
+<img src="{{ student.profile_image.url }}"
+class="rounded-circle shadow border border-4"
+style="width:180px;height:180px;object-fit:cover;">
+
+{% endif %}
+
+<h3 class="mt-3">
+
+{{ student.name }}
+
+</h3>
+
+<p class="text-muted">
+
+{{ student.course }}
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-8">
+
+<div class="card border-0 shadow-lg rounded-4">
+
+<div class="card-header bg-success text-white">
+
+<h4 class="mb-0">
+
+Student Details
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<table class="table table-hover">
+
+<tr>
+
+<th width="35%">Student Name</th>
+
+<td>{{ student.name }}</td>
+
+</tr>
+
+<tr>
+
+<th>Email</th>
+
+<td>{{ student.email }}</td>
+
+</tr>
+
+<tr>
+
+<th>Course</th>
+
+<td>{{ student.course }}</td>
+
+</tr>
+
+</table>
+
+<div class="text-center mt-4">
+
+{% if payment %}
+
+<a href="{% url 'generate_certificate' %}"
+class="btn btn-success btn-lg rounded-pill px-5">
+
+🏆 Generate Certificate
+
+</a>
+
+{% else %}
+
+<button
+class="btn btn-secondary btn-lg rounded-pill"
+disabled>
+
+🔒 Complete Payment First
+
+</button>
+
+<div class="alert alert-warning mt-3">
+
+Certificate Locked! Please complete your payment first.
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card border-0 shadow-lg rounded-4">
+
+<div class="card-header bg-primary text-white">
+
+<h4 class="mb-0">
+
+📜 My Certificate History
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+{% if certificates %}
+
+<table class="table table-bordered table-hover align-middle">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Certificate No.</th>
+<th>Course</th>
+<th>Issue Date</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for certificate in certificates %}
+
+<tr>
+
+<td>{{ certificate.certificate_number }}</td>
+
+<td>{{ certificate.course }}</td>
+
+<td>{{ certificate.issue_date }}</td>
+
+<td>
+
+<a href="{% url 'view_certificate' certificate.id %}"
+class="btn btn-primary btn-sm rounded-pill">
+
+👁 View
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% else %}
+
+<div class="alert alert-warning text-center">
+
+No Certificate Available.
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-danger text-center">
+
+Student not found.
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

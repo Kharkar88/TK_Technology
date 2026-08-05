@@ -1,0 +1,592 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Hero Section -->
+
+<section class="py-5 text-white" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h1 class="display-3 fw-bold">
+
+                    Learn Today,
+                    <br>
+                    Build Your Career
+
+                </h1>
+
+                <p class="lead mt-4">
+
+                    Join TK Technology and master Python,
+                    Django, Java, SQL, Data Analytics,
+                    Web Development and Live Projects.
+
+                </p>
+
+                <a href="#courses"
+                   class="btn btn-warning btn-lg rounded-pill px-4">
+
+                    Explore Courses →
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-6 text-center">
+
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900"
+                     class="img-fluid rounded-4 shadow-lg">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Courses -->
+
+<section id="courses" class="py-5">
+
+<div class="container">
+
+<h2 class="text-center fw-bold mb-5">
+
+Popular Courses
+
+</h2>
+
+<div class="row g-4">
+
+{% for course in courses %}
+
+<div class="col-lg-4 col-md-6">
+
+<div class="card border-0 shadow-lg rounded-4 h-100">
+
+<img src="{{ course.image.url }}"
+class="card-img-top"
+style="height:220px;object-fit:cover;">
+
+<div class="card-body d-flex flex-column">
+
+<h4 class="fw-bold">
+
+{{ course.name }}
+
+</h4>
+
+<p>
+
+<strong>Category :</strong>
+
+{{ course.category }}
+
+</p>
+
+<p>
+
+<strong>Duration :</strong>
+
+{{ course.duration }}
+
+</p>
+
+<p>
+
+{{ course.description|truncatechars:80 }}
+
+</p>
+
+<h5 class="text-success fw-bold">
+
+₹ {{ course.fees }}
+
+</h5>
+
+<a href="/courses/{{ course.id }}/"
+class="btn btn-primary mt-auto rounded-pill">
+
+Learn More →
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+{% empty %}
+
+<div class="col-12 text-center">
+
+<h4>No Courses Available</h4>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Why Choose Us -->
+
+<section class="py-5 bg-light">
+
+<div class="container">
+
+<h2 class="text-center fw-bold mb-5">
+
+Why Choose TK Technology?
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-lg-3 col-md-6">
+
+<div class="card border-0 shadow-lg rounded-4 h-100 text-center p-4">
+
+<h1>👨‍🏫</h1>
+
+<h5 class="fw-bold">
+
+Expert Trainers
+
+</h5>
+
+<p>
+
+Learn from experienced industry professionals.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="card border-0 shadow-lg rounded-4 h-100 text-center p-4">
+
+<h1>💼</h1>
+
+<h5 class="fw-bold">
+
+100% Placement Support
+
+</h5>
+
+<p>
+
+Resume Building, Mock Interviews and Placement Assistance.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="card border-0 shadow-lg rounded-4 h-100 text-center p-4">
+
+<h1>📚</h1>
+
+<h5 class="fw-bold">
+
+Live Projects
+
+</h5>
+
+<p>
+
+Build Real-Time Projects and Gain Practical Experience.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="card border-0 shadow-lg rounded-4 h-100 text-center p-4">
+
+<h1>🏆</h1>
+
+<h5 class="fw-bold">
+
+Certification
+
+</h5>
+
+<p>
+
+Industry Recognized Course Completion Certificate.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Trainers -->
+
+<section id="trainers" class="py-5">
+
+<div class="container">
+
+<h2 class="text-center fw-bold mb-5">
+
+Meet Our Trainers
+
+</h2>
+
+<div class="row g-4">
+
+{% for instructor in instructors %}
+
+<div class="col-lg-4 col-md-6">
+
+<div class="card border-0 shadow-lg rounded-4 h-100">
+
+<img src="{{ instructor.image.url }}"
+class="card-img-top"
+style="height:320px;object-fit:cover;">
+<div class="card-body text-center">
+
+<h4 class="fw-bold">
+
+{{ instructor.name }}
+
+</h4>
+
+<p>
+
+<strong>Subject :</strong>
+
+{{ instructor.subject }}
+
+</p>
+
+<p>
+
+<strong>Experience :</strong>
+
+{{ instructor.experience }} Years
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12 text-center">
+
+<h4>No Trainers Available</h4>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Student Reviews -->
+
+<section class="py-5 bg-light">
+
+<div class="container">
+
+<h2 class="text-center fw-bold mb-5">
+
+⭐ What Our Students Say
+
+</h2>
+
+<div class="row g-4">
+
+{% for feedback in feedbacks %}
+
+<div class="col-lg-4 col-md-6">
+
+<div class="card shadow border-0 rounded-4 h-100">
+
+<div class="card-body">
+
+<div class="text-center mb-3">
+
+<img src="{{ feedback.student.profile_image.url }}"
+class="rounded-circle"
+width="90"
+height="90"
+style="object-fit:cover;">
+
+</div>
+
+<h5 class="text-center fw-bold">
+
+{{ feedback.student.name }}
+
+</h5>
+
+<p class="text-center text-muted">
+
+{{ feedback.course.name }}
+
+</p>
+
+<h4 class="text-warning text-center">
+
+{% if feedback.rating == 1 %}
+⭐
+{% elif feedback.rating == 2 %}
+⭐⭐
+{% elif feedback.rating == 3 %}
+⭐⭐⭐
+{% elif feedback.rating == 4 %}
+⭐⭐⭐⭐
+{% else %}
+⭐⭐⭐⭐⭐
+{% endif %}
+
+</h4>
+
+<p class="text-center">
+
+"{{ feedback.message }}"
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12 text-center">
+
+<h4>
+
+No Reviews Yet.
+
+</h4>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Statistics -->
+
+<section class="py-5 text-white"
+style="background:linear-gradient(135deg,#0f172a,#1e293b);">
+
+<div class="container">
+
+<div class="row text-center">
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+<h1 class="display-5 fw-bold">
+
+{{ courses|length }}
+
+</h1>
+
+<h5>Courses</h5>
+
+</div>
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+<h1 class="display-5 fw-bold">
+
+{{ instructors|length }}
+
+</h1>
+
+<h5>Expert Trainers</h5>
+
+</div>
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+<h1 class="display-5 fw-bold">
+
+1000+
+
+</h1>
+
+<h5>Students</h5>
+
+</div>
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+<h1 class="display-5 fw-bold">
+
+100%
+
+</h1>
+
+<h5>Placement Support</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="py-5">
+
+<div class="container text-center">
+
+<h2 class="fw-bold mb-4">
+
+Ready to Start Your Career?
+
+</h2>
+
+<p class="lead mb-4">
+
+Join TK Technology and become job ready.
+
+</p>
+
+<a href="/students/register/"
+class="btn btn-primary btn-lg rounded-pill px-5">
+
+Register Now
+
+</a>
+
+</div>
+
+</section>
+<!-- Footer -->
+
+<footer class="py-5 bg-dark text-white">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-4">
+
+<h3 class="fw-bold">
+
+🚀 TK Technology
+
+</h3>
+
+<p class="mt-3">
+
+Learn Today. Lead Tomorrow.
+
+</p>
+
+</div>
+
+<div class="col-lg-4">
+
+<h5>
+
+Quick Links
+
+</h5>
+
+<ul class="list-unstyled">
+
+<li><a href="/" class="text-white text-decoration-none">Home</a></li>
+
+<li><a href="#courses" class="text-white text-decoration-none">Courses</a></li>
+
+<li><a href="#trainers" class="text-white text-decoration-none">Trainers</a></li>
+
+<li><a href="/contact/" class="text-white text-decoration-none">Contact</a></li>
+
+</ul>
+
+</div>
+
+<div class="col-lg-4">
+
+<h5>
+
+Contact
+
+</h5>
+
+<p>
+
+📍 Amravati, Maharashtra
+
+</p>
+
+<p>
+
+📞 +91 9876543210
+
+</p>
+
+<p>
+
+✉ info@tktechnology.com
+
+</p>
+
+</div>
+
+</div>
+
+<hr class="my-4">
+
+<div class="text-center">
+
+<p class="mb-0">
+
+© 2026 TK Technology. All Rights Reserved.
+
+</p>
+
+</div>
+
+</div>
+
+</footer>
+{% endblock %}

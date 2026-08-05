@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-10">
+
+<div class="card border-0 shadow-lg rounded-4">
+
+<div class="card-header bg-primary text-white text-center py-4">
+
+<h2 class="fw-bold mb-0">
+
+👤 Student Profile
+
+</h2>
+
+<p class="mb-0">
+
+Welcome to TK Technology
+
+</p>
+
+</div>
+
+<div class="card-body p-5">
+
+<div class="row">
+
+<div class="col-lg-4 text-center">
+
+{% if student.profile_image %}
+
+<img src="{{ student.profile_image.url }}"
+class="rounded-circle shadow border border-4"
+style="width:220px;height:220px;object-fit:cover;">
+
+{% else %}
+
+<img src="https://via.placeholder.com/220"
+class="rounded-circle shadow border border-4">
+
+{% endif %}
+
+<h3 class="mt-4 fw-bold">
+
+{{ student.name }}
+
+</h3>
+
+<p class="text-muted">
+
+{{ student.course }}
+
+</p>
+
+<span class="badge bg-success fs-6">
+
+Student
+
+</span>
+
+</div>
+
+<div class="col-lg-8">
+
+<table class="table table-hover align-middle">
+
+<tr>
+
+<th width="35%">📧 Email</th>
+
+<td>{{ student.email }}</td>
+
+</tr>
+
+<tr>
+
+<th>📱 Phone</th>
+
+<td>{{ student.phone }}</td>
+
+</tr>
+
+<tr>
+
+<th>🏠 Address</th>
+
+<td>{{ student.address }}</td>
+
+</tr>
+
+<tr>
+
+<th>🎂 Date of Birth</th>
+
+<td>{{ student.date_of_birth }}</td>
+
+</tr>
+
+<tr>
+
+<th>📚 Course</th>
+
+<td>{{ student.course }}</td>
+
+</tr>
+
+<tr>
+
+<th>📅 Registered On</th>
+
+<td>{{ student.created_at }}</td>
+
+</tr>
+
+</table>
+
+<div class="mt-4 d-flex gap-3 flex-wrap">
+
+<a href="/students/edit-profile/"
+class="btn btn-primary btn-lg rounded-pill">
+
+✏ Edit Profile
+
+</a>
+
+<a href="/dashboard/"
+class="btn btn-success btn-lg rounded-pill">
+
+📊 Dashboard
+
+</a>
+
+<a href="/students/logout/"
+class="btn btn-danger btn-lg rounded-pill">
+
+🚪 Logout
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

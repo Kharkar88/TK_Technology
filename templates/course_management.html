@@ -1,0 +1,138 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-success text-white">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h3>Course Management</h3>
+
+            <a href="{% url 'add_course' %}" class="btn btn-light">
+
+                + Add Course
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="GET" class="mb-3">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Search Course..."
+                        value="{{ search|default_if_none:'' }}">
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        Search
+
+                    </button>
+
+                    <a
+                        href="{% url 'course_management' %}"
+                        class="btn btn-secondary">
+
+                        Reset
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Course Name</th>
+                    <th>Category</th>
+                    <th>Duration</th>
+                    <th>Fees</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for course in courses %}
+
+                <tr>
+
+                    <td>{{ course.id }}</td>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.category }}</td>
+                    <td>{{ course.duration }}</td>
+                    <td>₹ {{ course.fees }}</td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'edit_course' course.id %}"
+                            class="btn btn-primary btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a
+                            href="{% url 'delete_course' course.id %}"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('Delete this course?')">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="6" class="text-center">
+
+                        No Courses Found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

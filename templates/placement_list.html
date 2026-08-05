@@ -1,0 +1,233 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-dark text-white">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h3 class="mb-0">
+                    💼 Placement Management
+                </h3>
+
+                <a href="{% url 'add_placement' %}"
+                   class="btn btn-success">
+
+                    + Add Placement
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="alert alert-success">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+            <form method="GET" class="row g-3 mb-4">
+
+                <div class="col-md-6">
+
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Search by Student, Company or Role..."
+                        value="{{ search }}">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <button
+                        type="submit"
+                        class="btn btn-dark">
+
+                        🔍 Search
+
+                    </button>
+
+                    <a href="{% url 'placement_management' %}"
+                       class="btn btn-secondary">
+
+                        Reset
+
+                    </a>
+
+                </div>
+
+            </form>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>Logo</th>
+
+                            <th>Student</th>
+
+                            <th>Company</th>
+
+                            <th>Role</th>
+
+                            <th>Package</th>
+
+                            <th>Date</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for placement in placements %}
+
+                        <tr>
+
+                            <td>
+
+                                <img src="{{ placement.company_logo.url }}"
+                                     width="60"
+                                     height="60"
+                                     class="rounded">
+
+                            </td>
+
+                            <td>{{ placement.student_name }}</td>
+
+                            <td>{{ placement.company_name }}</td>
+
+                            <td>{{ placement.job_role }}</td>
+
+                            <td>₹ {{ placement.package }} LPA</td>
+
+                            <td>{{ placement.placement_date }}</td>
+
+                            <td>
+
+                                <a href="{% url 'edit_placement' placement.id %}"
+                                   class="btn btn-primary btn-sm">
+
+                                    Edit
+
+                                </a>
+
+                                <a href="{% url 'delete_placement' placement.id %}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Delete this placement?')">
+
+                                    Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="7"
+                                class="text-center">
+
+                                No Placements Found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% if page_obj.has_other_pages %}
+
+            <nav class="mt-4">
+
+                <ul class="pagination justify-content-center">
+
+                    {% if page_obj.has_previous %}
+
+                    <li class="page-item">
+
+                        <a class="page-link"
+                           href="?page={{ page_obj.previous_page_number }}&search={{ search }}">
+
+                            Previous
+
+                        </a>
+
+                    </li>
+
+                    {% endif %}
+
+                    <li class="page-item active">
+
+                        <span class="page-link">
+
+                            {{ page_obj.number }}
+
+                            /
+
+                            {{ page_obj.paginator.num_pages }}
+
+                        </span>
+
+                    </li>
+
+                    {% if page_obj.has_next %}
+
+                    <li class="page-item">
+
+                        <a class="page-link"
+                           href="?page={{ page_obj.next_page_number }}&search={{ search }}">
+
+                            Next
+
+                        </a>
+
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </nav>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>📑 Add / Edit Result</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Student</label>
+                    {{ form.student }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Course</label>
+                    {{ form.course }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Theory Marks</label>
+                    {{ form.theory_marks }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Practical Marks</label>
+                    {{ form.practical_marks }}
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    💾 Save Result
+                </button>
+
+                <a href="{% url 'result_management' %}" class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+<div class="text-center mb-5">
+<h2 class="fw-bold">📊 TK Technology Dashboard</h2>
+<h5 class="text-muted">Welcome, <span class="text-primary">{{ request.user.username }}</span></h5>
+</div>
+
+<div class="row">
+<div class="col-md-3 mb-4"><div class="card bg-primary text-white shadow"><div class="card-body text-center"><h5>Total Students</h5><h2>{{ total_students }}</h2></div></div></div>
+<div class="col-md-3 mb-4"><div class="card bg-success text-white shadow"><div class="card-body text-center"><h5>Total Courses</h5><h2>{{ total_courses }}</h2></div></div></div>
+<div class="col-md-3 mb-4"><div class="card bg-warning text-dark shadow"><div class="card-body text-center"><h5>Total Trainers</h5><h2>{{ total_instructors }}</h2></div></div></div>
+<div class="col-md-3 mb-4"><div class="card bg-danger text-white shadow"><div class="card-body text-center"><h5>Total Contacts</h5><h2>{{ total_contacts }}</h2></div></div></div>
+</div>
+
+{% if student %}
+<div class="card shadow mb-4">
+<div class="card-header bg-primary text-white"><h4>👨‍🎓 My Information</h4></div>
+<div class="card-body">
+<div class="row">
+<div class="col-md-3 text-center"><img src="{{ student.profile_image.url }}" class="img-fluid rounded-circle border" width="180"></div>
+<div class="col-md-9">
+<table class="table table-bordered">
+<tr><th>Name</th><td>{{ student.name }}</td></tr>
+<tr><th>Email</th><td>{{ student.email }}</td></tr>
+<tr><th>Phone</th><td>{{ student.phone }}</td></tr>
+<tr><th>Course</th><td>{{ student.course }}</td></tr>
+<tr><th>Registration Date</th><td>{{ student.created_at }}</td></tr>
+</table>
+</div></div></div></div>
+
+<div class="card shadow mb-4">
+<div class="card-header bg-success text-white"><h4>📈 Course Progress</h4></div>
+<div class="card-body">
+{% if progress == 100 %}
+<div class="progress"><div class="progress-bar bg-success" style="width:100%;">100%</div></div>
+{% elif progress == 70 %}
+<div class="progress"><div class="progress-bar bg-success" style="width:70%;">70%</div></div>
+{% else %}
+<div class="progress"><div class="progress-bar bg-success" style="width:25%;">25%</div></div>
+{% endif %}
+</div></div>
+
+<div class="row">
+<div class="col-md-6 mb-4"><div class="card shadow"><div class="card-body text-center"><h4>💳 Payment Status</h4>{% if payment_status == "Paid" %}<span class="badge bg-success fs-5">Paid</span>{% else %}<span class="badge bg-warning text-dark fs-5">Pending</span>{% endif %}</div></div></div>
+<div class="col-md-6 mb-4"><div class="card shadow"><div class="card-body text-center"><h4>🏆 Certificate Status</h4>{% if certificate_status == "Generated" %}<span class="badge bg-success fs-5">Generated</span>{% else %}<span class="badge bg-secondary fs-5">Not Generated</span>{% endif %}</div></div></div>
+</div>
+{% endif %}
+
+<div class="card shadow">
+<div class="card-header bg-dark text-white"><h4>⚡ Quick Actions</h4></div>
+<div class="card-body text-center">
+<a href="/students/profile/" class="btn btn-primary m-2">👤 My Profile</a>
+<a href="/students/edit-profile/" class="btn btn-warning m-2">✏️ Edit Profile</a>
+<a href="/feedback/" class="btn btn-info text-white m-2">⭐ Feedback</a>
+<a href="/students/logout/" class="btn btn-danger m-2">🚪 Logout</a>
+</div></div>
+
+</div>
+{% endblock %}
