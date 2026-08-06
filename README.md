@@ -56,3 +56,22 @@ This project helps manage students, courses, trainers, payments, attendance, res
 - Manage company details
 
 ## 📂 Project Structure
+## 📸 Screenshots
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin_dashboard.png)
+
+### Student Management
+![Student Management](screenshots/student_management.png)
+
+### Course Management
+![Course Management](screenshots/course_management.png)
+
+### Placement Management
+![Placement Management](screenshots/placement_management.png)
+
+### Result Management
+![Result Management](screenshots/result_management.png)
