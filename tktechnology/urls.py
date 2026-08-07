@@ -65,6 +65,9 @@ urlpatterns = [
         'results/',
         include('results.urls')
     ),
+    path(
+        'instructors/', 
+        include('instructors.urls')),
 
 ]
 

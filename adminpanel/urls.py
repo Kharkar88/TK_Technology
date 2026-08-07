@@ -16,6 +16,7 @@ from .views.courses import (
 
 from .views.trainers import (
     trainer_management,
+    add_trainer,
     edit_trainer,
     delete_trainer,
 )
@@ -75,6 +76,7 @@ urlpatterns = [
 
     # Trainers
     path("trainers/", trainer_management, name="trainer_management"),
+    path("trainers/add/", add_trainer, name="add_trainer"),
     path("trainers/edit/<int:trainer_id>/", edit_trainer, name="edit_trainer"),
     path("trainers/delete/<int:trainer_id>/", delete_trainer, name="delete_trainer"),
 

@@ -13,7 +13,6 @@ def trainer_management(request):
     trainers = Instructor.objects.all().order_by("-id")
 
     if search:
-
         trainers = trainers.filter(
             name__icontains=search
         )
@@ -25,6 +24,33 @@ def trainer_management(request):
             "trainers": trainers,
             "search": search,
         }
+    )
+
+
+@login_required
+def add_trainer(request):
+
+    if request.method == "POST":
+
+        Instructor.objects.create(
+            name=request.POST.get("name"),
+            email=request.POST.get("email"),
+            phone=request.POST.get("phone"),
+            subject=request.POST.get("subject"),
+            experience=request.POST.get("experience"),
+        )
+
+        messages.success(
+            request,
+            "Trainer Added Successfully."
+        )
+
+        return redirect("trainer_management")
+
+
+    return render(
+        request,
+        "add_trainer.html"
     )
 
 
@@ -52,6 +78,7 @@ def edit_trainer(request, trainer_id):
         )
 
         return redirect("trainer_management")
+
 
     return render(
         request,
