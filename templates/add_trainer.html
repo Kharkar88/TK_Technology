@@ -2,126 +2,119 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<div class="card shadow">
 
-    <div class="card shadow">
-
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">
-                Add New Trainer
-            </h4>
-        </div>
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">
+            Add New Trainer
+        </h4>
+    </div>
 
 
-        <div class="card-body">
+    <div class="card-body">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
 
 
-            <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">
+                    Trainer Name
+                </label>
 
-                {% csrf_token %}
-
-
-                <div class="mb-3">
-                    <label class="form-label">
-                        Trainer Name
-                    </label>
-
-                    <input 
-                    type="text" 
-                    name="name" 
-                    class="form-control"
-                    placeholder="Enter trainer name"
-                    required>
-                </div>
+                <input 
+                type="text" 
+                name="name" 
+                class="form-control"
+                placeholder="Enter trainer name"
+                required>
+            </div>
 
 
+            <div class="mb-3">
+                <label class="form-label">
+                    Email
+                </label>
 
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Email
-                    </label>
-
-                    <input 
-                    type="email" 
-                    name="email"
-                    class="form-control"
-                    placeholder="Enter email address"
-                    required>
-
-                </div>
+                <input 
+                type="email" 
+                name="email"
+                class="form-control"
+                placeholder="Enter email address"
+                required>
+            </div>
 
 
+            <div class="mb-3">
+                <label class="form-label">
+                    Phone Number
+                </label>
 
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Phone Number
-                    </label>
-
-                    <input 
-                    type="text" 
-                    name="phone"
-                    class="form-control"
-                    placeholder="Enter phone number">
-
-                </div>
+                <input 
+                type="text" 
+                name="phone"
+                class="form-control"
+                placeholder="Enter phone number">
+            </div>
 
 
+            <div class="mb-3">
+                <label class="form-label">
+                    Subject
+                </label>
+
+                <input 
+                type="text" 
+                name="subject"
+                class="form-control"
+                placeholder="Enter subject">
+            </div>
 
 
-                <div class="mb-3">
+            <div class="mb-3">
+                <label class="form-label">
+                    Experience
+                </label>
 
-                    <label class="form-label">
-                        Subject
-                    </label>
-
-                    <input 
-                    type="text" 
-                    name="subject"
-                    class="form-control"
-                    placeholder="Enter subject">
-
-                </div>
+                <input 
+                type="number" 
+                name="experience"
+                class="form-control"
+                placeholder="Enter experience in years">
+            </div>
 
 
+            <!-- Trainer Image -->
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Trainer Image
+                </label>
+
+                <input 
+                type="file"
+                name="image"
+                class="form-control">
+
+            </div>
 
 
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Experience
-                    </label>
-
-                    <input 
-                    type="text" 
-                    name="experience"
-                    class="form-control"
-                    placeholder="Example: 5 Years">
-
-                </div>
+            <button type="submit" class="btn btn-success">
+                Add Trainer
+            </button>
 
 
-
-                <button type="submit" class="btn btn-success">
-                    Add Trainer
-                </button>
-
-
-                <a href="{% url 'trainer_management' %}" 
-                   class="btn btn-secondary">
-                    Back
-                </a>
+            <a href="{% url 'trainer_management' %}" 
+               class="btn btn-secondary">
+                Back
+            </a>
 
 
-            </form>
-
-
-        </div>
+        </form>
 
     </div>
 
 </div>
-
 
 {% endblock %}

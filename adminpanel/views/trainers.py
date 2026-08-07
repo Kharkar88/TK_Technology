@@ -32,13 +32,18 @@ def add_trainer(request):
 
     if request.method == "POST":
 
-        Instructor.objects.create(
+        trainer = Instructor(
             name=request.POST.get("name"),
             email=request.POST.get("email"),
             phone=request.POST.get("phone"),
             subject=request.POST.get("subject"),
             experience=request.POST.get("experience"),
         )
+
+        # Save uploaded image
+        trainer.image = request.FILES.get("image")
+
+        trainer.save()
 
         messages.success(
             request,
@@ -69,6 +74,10 @@ def edit_trainer(request, trainer_id):
         trainer.phone = request.POST.get("phone")
         trainer.subject = request.POST.get("subject")
         trainer.experience = request.POST.get("experience")
+
+        # Update image if new image uploaded
+        if request.FILES.get("image"):
+            trainer.image = request.FILES.get("image")
 
         trainer.save()
 
